@@ -21,7 +21,6 @@ export default class extends Phaser.State {
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
   }
-
   render() {
     if (this.fontsReady) {
     }
