@@ -19,6 +19,10 @@ export default class extends Phaser.State {
   }
 
   preload() {
+    this.load.image('ball', 'src/assets/images/ball1.png');
+    // this.load.image('ball2', 'src/assets/images/ball2.png');
+    // this.load.image('ball3', 'src/assets/images/ball3.png');
+    // this.load.image('ball4', 'src/assets/images/ball4.png');
     this.load.image('ball', 'src/assets/images/ball.png');
     this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
@@ -50,8 +54,7 @@ export default class extends Phaser.State {
   }
 
   update(){
-    this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle, null, this);
-    this.game.physics.arcade.collide(this.ball, this.brick, this.ball.hitBrick, null, this);
+    this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle.bind(this.ball, this.paddle), null, this);
   }
   
   render() {
