@@ -29,7 +29,8 @@ export default class extends Phaser.State {
 
   render() {
     if (this.fontsReady) {
-      console.log('Fonts loaded')
+      console.log('Fonts loaded');
+      this.state.start('game');
     }
   }
 }
