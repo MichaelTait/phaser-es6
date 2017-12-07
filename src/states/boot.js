@@ -32,4 +32,8 @@ export default class extends Phaser.State {
       console.log('Fonts loaded')
     }
   }
+
+  create() {
+    this.state.start('Game');
+  }
 }
