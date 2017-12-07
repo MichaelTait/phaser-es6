@@ -11,7 +11,7 @@ export default class extends Phaser.Sprite {
         this.body.bounce.set(1);
         // this.events.onOutOfBounds.add(ballLost, this);
         this.animations.add('spin', ['chipBlackWhite_border.png', 'chipBlueWhite_border.png', 'chipGreenWhite_border.png', 'chipWhite_border.png'], 50, true, false);
-        this.body.velocity.setTo(200, 200);
+        this.body.velocity.setTo(1000, 1000);
     }
 
     create(){
