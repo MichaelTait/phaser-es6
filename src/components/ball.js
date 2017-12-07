@@ -10,11 +10,11 @@ export default class extends Phaser.Sprite {
         this.body.collideWorldBounds = true;
         this.body.bounce.set(1);
         // this.events.onOutOfBounds.add(ballLost, this);
-        this.animations.add('spin', ['chipBlackWhite_border.png', 'chipBlueWhite_border.png', 'chipGreenWhite_border.png', 'chipWhite_border.png'], 50, true, false);
-        this.animations.play('spin');
+        //this.animations.add('spin', ['chipBlackWhite_border.png', 'chipBlueWhite_border.png', 'chipGreenWhite_border.png', 'chipWhite_border.png'], 50, true, false);
+        //this.animations.play('spin');
         this.body.velocity.setTo(200, 200);
     }
-    
+
     hitPaddle(){
         var diff = 0;
 
