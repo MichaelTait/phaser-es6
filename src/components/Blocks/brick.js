@@ -5,7 +5,4 @@ export default class extends Block {
       super(phaserGame, x, y, asset);
     }
 
-    update() {
-
-    }
 }
