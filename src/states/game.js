@@ -31,6 +31,11 @@ export default class extends Phaser.State {
     this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
     this.game.stage.addChild(this.paddle);
   }
+
+  update(){
+    this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle, null, this);
+  }
+  
   render() {
     if (this.fontsReady) {
     }
