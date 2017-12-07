@@ -1,13 +1,16 @@
 import Phaser from 'phaser';
 import WebFont from 'webfontloader';
 import Ball from '../components/ball';
-import Block from '../components/Blocks/block';
+import Brick from '../components/Blocks/brick';
 import Paddle from '../components/Blocks/paddle';
 
 export default class extends Phaser.State {
   constructor() {
     super();
     this.fontsReady = false;
+    this.wallLength = 10;
+    this.wallHeight = 4;
+    this.bricks = [];
   }
 
   init() {
@@ -17,7 +20,7 @@ export default class extends Phaser.State {
 
   preload() {
     this.load.image('ball', 'src/assets/images/ball.png');
-    this.load.image('block', 'src/assets/images/block.png');
+    this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
   }
 
@@ -25,15 +28,30 @@ export default class extends Phaser.State {
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
 
-    this.block = new Block(this.game, this.game.world.centerX, this.game.world.centerY, 'block');
-    this.game.stage.addChild(this.block);
+    this.brick = new Brick(this.game, this.game.world.centerX, this.game.world.centerY, 'brick');
+    this.game.stage.addChild(this.brick);
 
     this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
     this.game.stage.addChild(this.paddle);
+
+    for (let i = 0; i < this.wallLength; i++) {
+      for (let x = 0; x < this.wallHeight; x++) {
+        const padding = 80;
+        const maxHeight = window.innerWidth / 5;
+        const maxWidth = window.innerWidth;
+
+        const positionX = (maxWidth / this.wallLength  * i) + padding;
+        const positionY = (maxHeight / this.wallHeight * x) + padding;
+
+        const brick = new Brick(this.game, positionX, positionY, 'brick');
+        this.game.stage.addChild(brick);
+      }
+    }
   }
 
   update(){
     this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle, null, this);
+    this.game.physics.arcade.collide(this.ball, this.brick, this.ball.hitBrick, null, this);
   }
   
   render() {
