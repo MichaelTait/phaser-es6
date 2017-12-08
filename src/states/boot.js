@@ -38,7 +38,6 @@ export default class extends Phaser.State {
     subText.anchor.setTo(0.5, 0.5);
   }
 
-
   render() {
     if (this.fontsReady) {
       console.log('Fonts loaded');
