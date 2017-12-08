@@ -37,6 +37,7 @@ export default class extends Phaser.State {
   }
 
   create() {
+    this.bricks = [];
     this.deathSound = this.game.add.audio('deathSound');
 
     game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'background');
@@ -122,7 +123,7 @@ export default class extends Phaser.State {
       this.game.physics.arcade.collide(this.ball, this.bricks[i], this.bricks[i].destroy.bind(this.bricks[i]), null, this);
       }
     }
-    if (this.game.score == this.bricks.length) {
+    if (this.game.score === this.bricks.length) {
       this.paddle.kill();
       this.ball.kill();
       this.state.start('Win');
