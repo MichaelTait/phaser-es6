@@ -20,14 +20,6 @@ export default class extends Phaser.State {
   init() {
     //Set the main background colour of the scene.
     this.stage.backgroundColour = '#ff00ff';
-    this.game.score = 0;
-    this.game.scoreText = this.add.text(16, this.game.height -50, 'Score: ' + this.game.score, {
-      font: '44px Arial', fill: '#efefef', align: 'center'
-    });
-    this.game.lives = 3;
-    this.game.livesText = this.add.text(this.game.width - 175, this.game.height -50, 'Lives: ' + this.game.lives, {
-      font: '44px Arial', fill: '#efefef', align: 'center'});
-      
     this.game.ballOnPaddle = true;
   }
 
@@ -40,12 +32,23 @@ export default class extends Phaser.State {
     this.load.audio('collisionSound', 'src/assets/Audio/collisionSound.wav');
     this.load.audio('deathSound', 'src/assets/Audio/deathSound.wav');
   }
-    
+  
   create() {
-
     this.deathSound = this.game.add.audio('deathSound');
+    
+        this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
 
-    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
+        this.load.image('background', 'src/assets/images/background.png');
+
+    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'background');
+    this.game.score = 0;
+    this.game.scoreText = this.add.text(16, this.game.height -50, 'Score: ' + this.game.score, {
+      font: '44px Arial', fill: '#efefef', align: 'center'
+    });
+    this.game.lives = 3;
+    this.game.livesText = this.add.text(this.game.width - 175, this.game.height -50, 'Lives: ' + this.game.lives, {
+      font: '44px Arial', fill: '#efefef', align: 'center'});
+    this.paddle = new Paddle(this.game, this.game.world.centerX, window.innerHeight - 50, 'paddle');
     this.game.stage.addChild(this.paddle);
 
     this.ball = new Ball(this.game, this.paddle.x, this.paddle.y - 40, 'ball');
@@ -88,7 +91,13 @@ export default class extends Phaser.State {
 
     if(this.game.lives === 0)
     {
-        //this.game.state.start('GameOver');
+      for (let i = 0; i < this.bricks.length; i++) {
+        this.bricks[i].kill();
+      }
+      this.paddle.kill();
+      this.ball.kill();
+      this.game.state.start('Lose');
+        
     }
     else
     {
@@ -113,6 +122,8 @@ export default class extends Phaser.State {
       }
     }
     if (this.game.score == 80) {
+      this.paddle.kill();
+      this.ball.kill();
       this.state.start('Win');
     }
 

@@ -24,17 +24,17 @@ export default class extends Phaser.State {
 
    
 
-    this.load.image('background', 'src/assets/images/background.png');
+    //this.load.image('jakub', 'src/assets/images/jakub.png');
   }
 
   create() {
-    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'background');
-    const text = this.add.text(this.world.centerX, this.world.centerY, 'Congratulations for Completing the Trial', {
-      font: '44px Arial', fill: '#000000', align: 'center'
+    //game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'jakub');
+    const text = this.add.text(this.world.centerX, this.world.centerY, 'You lose :(', {
+      font: '44px Arial', fill: '#ffffff', align: 'center'
     });
     text.anchor.setTo(0.5, 0.5);
-    const subText = this.add.text(this.world.centerX, this.world.centerY + 50, 'HOFEBSOFUBSEIFBIESBF', {
-      font: '33px Arial', fill: '#000000', align: 'center'
+    const subText = this.add.text(this.world.centerX, this.world.centerY + 50, 'Click to restart', {
+      font: '33px Arial', fill: '#ffffff', align: 'center'
     });
     subText.anchor.setTo(0.5, 0.5);
   }
@@ -49,6 +49,6 @@ export default class extends Phaser.State {
     if (this.input.activePointer.isDown) {
       this.state.start('Game');
     }
-  }
+}
 
 }
