@@ -10,10 +10,15 @@ export default class extends Phaser.Sprite {
         this.body.collideWorldBounds = true;
         this.body.bounce.set(1);
         // this.events.onOutOfBounds.add(ballLost, this);
-        //this.animations.add('spin', ['ball1', 'ball2', 'ball3', 'ball4'], 50, true, false);
-        //this.animations.play('spin');
         this.body.velocity.y = -200;
         this.body.velocity.x = -75;
+        this.create();
+    }
+
+    create()
+    {
+        this.animations.add('blink', ['ball1.png', 'ball2.png', 'ball3.png', 'ball4.png'], 5, true, false);
+        this.animations.play('blink');
     }
 
     hitPaddle(paddle){

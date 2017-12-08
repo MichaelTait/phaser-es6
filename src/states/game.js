@@ -19,16 +19,17 @@ export default class extends Phaser.State {
   }
 
   preload() {
-    this.load.image('ball', 'src/assets/images/ball1.png');
-    // this.load.image('ball2', 'src/assets/images/ball2.png');
-    // this.load.image('ball3', 'src/assets/images/ball3.png');
-    // this.load.image('ball4', 'src/assets/images/ball4.png');
-    this.load.image('ball', 'src/assets/images/ball.png');
+    this.load.atlas('ball', 'src/assets/images/spriteSheet.png', 'src/assets/images/spriteSheet.json')
+    this.load.image('logo', 'src/assets/images/logo.png')
     this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
   }
 
   create() {
+
+    var backgroundImage = game.add.sprite(130, 300, 'logo');
+    backgroundImage.scale.setTo(0.8, 0.8);
+
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
 
@@ -37,6 +38,9 @@ export default class extends Phaser.State {
 
     this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
     this.game.stage.addChild(this.paddle);
+
+    var score = this.add.text(32, this.game.height - 32, 'score: 0', {font: "20px Arial", fill: "#ffffff", align: "left"})
+    var lives = this.add.text(this.game.width - 96, this.game.height - 32, 'lives: 3', { font: "20px Arial", fill: "#ffffff", align: "left" });
 
     for (let i = 0; i < this.wallLength; i++) {
       for (let x = 0; x < this.wallHeight; x++) {
