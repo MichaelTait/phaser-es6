@@ -21,20 +21,33 @@ export default class extends Phaser.State {
       active: () => this.fontsReady = true
     });
 
+   
+
+    this.load.image('jakub', 'src/assets/images/jakub.png');
+  }
+
+  create() {
+    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'jakub');
     const text = this.add.text(this.world.centerX, this.world.centerY, 'Bede Bricks', {
-      font: '44px Arial', fill: '#efefef', align: 'center'
+      font: '44px Arial', fill: '#000000', align: 'center'
     });
     text.anchor.setTo(0.5, 0.5);
+    const subText = this.add.text(this.world.centerX, this.world.centerY + 50, 'Click anywhere to begin...', {
+      font: '33px Arial', fill: '#000000', align: 'center'
+    });
+    subText.anchor.setTo(0.5, 0.5);
   }
+
 
   render() {
     if (this.fontsReady) {
       console.log('Fonts loaded');
-      this.state.start('game');
     }
   }
 
-  create() {
-    this.state.start('Game');
+  update() {
+    if (this.input.activePointer.isDown) {
+      this.state.start('Game');
+    }
   }
 }
