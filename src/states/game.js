@@ -8,9 +8,11 @@ export default class extends Phaser.State {
   constructor() {
     super();
     this.fontsReady = false;
-    this.wallLength = 20;
+    //this.screenWidth = window.innerWidth;
+    this.wallLength = ~~(window.innerWidth/128);
     this.wallHeight = 4;
     this.bricks = [];
+
   }
 
   init() {
@@ -24,6 +26,7 @@ export default class extends Phaser.State {
     this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
     this.load.image('background', 'src/assets/images/background.png');
+
   }
     
   create() {
