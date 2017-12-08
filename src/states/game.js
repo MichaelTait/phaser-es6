@@ -8,6 +8,7 @@ export default class extends Phaser.State {
   constructor() {
     super();
     this.fontsReady = false;
+
   }
 
   init() {
@@ -20,7 +21,7 @@ export default class extends Phaser.State {
     this.load.image('block', 'src/assets/images/block.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
   }
-
+    
   create() {
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
@@ -28,13 +29,15 @@ export default class extends Phaser.State {
     this.block = new Block(this.game, this.game.world.centerX, this.game.world.centerY, 'block');
     this.game.stage.addChild(this.block);
 
-    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
+    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY + 500, 'paddle');
     this.game.stage.addChild(this.paddle);
+    this.game.physics.enable(this.paddle, Phaser.Physics.ARCADE);
+
   }
 
   update(){
     this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle, null, this);
-  }
+    }
   
   render() {
     if (this.fontsReady) {
