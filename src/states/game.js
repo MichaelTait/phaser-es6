@@ -8,7 +8,7 @@ export default class extends Phaser.State {
   constructor() {
     super();
     this.fontsReady = false;
-    this.wallLength = 10;
+    this.wallLength = 20;
     this.wallHeight = 4;
     this.bricks = [];
   }
@@ -38,7 +38,7 @@ export default class extends Phaser.State {
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
 
-    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
+    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY + 500, 'paddle');
     this.game.stage.addChild(this.paddle);
 
     var score = this.add.text(32, this.game.height - 32, 'score: 0', {font: "20px Arial", fill: "#ffffff", align: "left"})
@@ -46,9 +46,9 @@ export default class extends Phaser.State {
 
     for (let i = 0; i < this.wallLength; i++) {
       for (let x = 0; x < this.wallHeight; x++) {
-        const padding = 80;
+        const padding = 60;
         const maxHeight = window.innerWidth / 5;
-        const maxWidth = window.innerWidth / 2;
+        const maxWidth = window.innerWidth;
 
         const positionX = (maxWidth / this.wallLength  * i) + padding;
         const positionY = (maxHeight / this.wallHeight * x) + padding;
