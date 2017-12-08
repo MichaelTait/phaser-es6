@@ -48,16 +48,16 @@ export default class extends Phaser.Sprite {
         if(this.x < paddle.x)
         {
             diff = paddle.x - this.x;
-            this.body.velocity.x = (-10 * diff + difficulty);
+            this.body.velocity.x = (-20 * diff + difficulty);
         }
         else if (this.x > paddle.x)
         {
             diff = this.x - paddle.x;
-            this.body.velocity.x = (10 * diff);
+            this.body.velocity.x = (20 * diff);
         }
         else
         {
-            this.body.velocity.x = 2 + Math.random() * 8;
+            this.body.velocity.x = 10 + Math.random() * 20;
         }
     }
 }
