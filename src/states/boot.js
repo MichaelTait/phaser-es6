@@ -24,13 +24,13 @@ export default class extends Phaser.State {
 
    this.load.audio('gamePlay', 'src/assets/Audio/gamePlay.mp3');
 
-    this.load.image('jakub', 'src/assets/images/jakub.png');
+    this.load.image('splashscreen', 'src/assets/images/splashscreen.jpg');
   }
 
 
 
   create() {
-    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'jakub');
+    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'splashscreen');
     const text = this.add.text(this.world.centerX, this.world.centerY, 'Bede Bricks', {
       font: '44px Arial', fill: '#000000', align: 'center'
     });
