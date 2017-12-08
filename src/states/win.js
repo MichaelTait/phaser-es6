@@ -45,5 +45,10 @@ export default class extends Phaser.State {
       console.log('Fonts loaded');
     }
   }
+  update() {
+    if (this.input.activePointer.isDown) {
+      this.state.start('Game');
+    }
+  }
 
 }

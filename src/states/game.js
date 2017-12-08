@@ -35,7 +35,7 @@ export default class extends Phaser.State {
     this.game.lives = 3;
     this.game.livesText = this.add.text(this.game.width - 175, this.game.height -50, 'Lives: ' + this.game.lives, {
       font: '44px Arial', fill: '#efefef', align: 'center'});
-    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY + 350, 'paddle');
+    this.paddle = new Paddle(this.game, this.game.world.centerX, window.innerHeight - 50, 'paddle');
     this.game.stage.addChild(this.paddle);
 
     this.ball = new Ball(this.game, this.paddle.x, this.paddle.y - 40, 'ball');
@@ -107,6 +107,8 @@ export default class extends Phaser.State {
       }
     }
     if (this.game.score == 80) {
+      this.paddle.kill();
+      this.ball.kill();
       this.state.start('Win');
     }
   }

@@ -33,7 +33,7 @@ export default class extends Phaser.State {
       font: '44px Arial', fill: '#ffffff', align: 'center'
     });
     text.anchor.setTo(0.5, 0.5);
-    const subText = this.add.text(this.world.centerX, this.world.centerY + 50, 'Try again', {
+    const subText = this.add.text(this.world.centerX, this.world.centerY + 50, 'Click to restart', {
       font: '33px Arial', fill: '#ffffff', align: 'center'
     });
     subText.anchor.setTo(0.5, 0.5);
@@ -45,5 +45,10 @@ export default class extends Phaser.State {
       console.log('Fonts loaded');
     }
   }
+  update() {
+    if (this.input.activePointer.isDown) {
+      this.state.start('Game');
+    }
+}
 
 }
