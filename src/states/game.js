@@ -37,11 +37,8 @@ export default class extends Phaser.State {
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
 
-    this.brick = new Brick(this.game, this.game.world.centerX, this.game.world.centerY, 'brick');
-    this.game.stage.addChild(this.brick);
-
     this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
-    //this.game.stage.addChild(this.paddle);
+    this.game.stage.addChild(this.paddle);
 
     for (let i = 0; i < this.wallLength; i++) {
       for (let x = 0; x < this.wallHeight; x++) {
