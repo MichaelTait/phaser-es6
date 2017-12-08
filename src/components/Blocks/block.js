@@ -8,9 +8,16 @@ export default class extends Phaser.Sprite {
       phaserGame.physics.enable(this, Phaser.Physics.ARCADE);
       this.body.collideWorldBounds = true;
       this.body.immovable = true;      
+      this.brickSound;
+      this.create();
+    }
+
+    create(){
+      this.brickSound = this.game.add.audio('brickSound');
     }
 
     destroy() {
+      this.brickSound.play();
       this.kill();
       this.game.score++;
       this.game.scoreText.setText('Score: ' + this.game.score);
