@@ -18,6 +18,5 @@ export default class extends Block {
         if (this.x > window.innerWidth - paddleWidth) {
             this.x = window.innerWidth - paddleWidth;
         }
-        console.log(paddleWidth); 
     }
 }   

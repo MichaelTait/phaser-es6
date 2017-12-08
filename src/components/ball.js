@@ -6,18 +6,18 @@ export default class extends Phaser.Sprite {
         super(phaserGame, x, y, asset);
         this.scale.setTo(0.5);
         this.anchor.set(0.5);
-        phaserGame.physics.enable(this, Phaser.Physics.ARCADE);
+        this.game.physics.enable(this, Phaser.Physics.ARCADE);
+        this.checkWorldBounds = true;
         this.body.collideWorldBounds = true;
         this.body.bounce.set(1);
-        this.body.velocity.y = -200;
-        this.body.velocity.x = -75;
         this.create();
+        this.game.physics.arcade.checkCollision.down = false;
+
     }
 
     create()
     {
         this.animations.add('blink', ['ball1.png', 'ball2.png', 'ball3.png', 'ball4.png'], 5, true, false);
-        this.animations.play('blink');
     }
 
     hitPaddle(paddle){

@@ -27,14 +27,12 @@ export default class extends Phaser.State {
     text.anchor.setTo(0.5, 0.5);
   }
 
-  render() {
-    if (this.fontsReady) {
-      console.log('Fonts loaded');
-      this.state.start('game');
-    }
-  }
-
   create() {
     this.state.start('Game');
+    //this.state.start('GameOver');
+  }
+
+  render() {
+      this.state.start('Game');
   }
 }
