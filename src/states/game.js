@@ -8,10 +8,11 @@ export default class extends Phaser.State {
   constructor() {
     super();
     this.fontsReady = false;
-    this.wallLength = 20;
+    //this.screenWidth = window.innerWidth;
+    this.wallLength = Math.floor(window.innerWidth / 128);
     this.wallHeight = 4;
     this.bricks = [];
-
+    
     this.collisionSound;
     this.deathSound;
     this.brickSound;
@@ -31,7 +32,7 @@ export default class extends Phaser.State {
     this.load.audio('brickSound', 'src/assets/Audio/brickSound.wav');
     this.load.audio('collisionSound', 'src/assets/Audio/collisionSound.wav');
     this.load.audio('deathSound', 'src/assets/Audio/deathSound.wav');
-
+    
     this.load.image('background', 'src/assets/images/background.png');
   }
 
