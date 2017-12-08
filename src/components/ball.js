@@ -13,6 +13,7 @@ export default class extends Phaser.Sprite {
         this.create();
         this.game.physics.arcade.checkCollision.down = false;
         this.collisionSound;
+        this.ballFrame = 1;
     }
 
     create()
@@ -26,7 +27,17 @@ export default class extends Phaser.Sprite {
         const blocked = this.body.blocked
         if(blocked.left || blocked.right || blocked.up){
             this.collisionSound.play();
+            this.changeFrame();
         }
+    }
+
+    changeFrame(){
+        console.log('here')
+        this.ballFrame++;
+        if(this.ballFrame > 4){
+            this.ballFrame = 1;
+        }
+        this.frameName = 'ball' + this.ballFrame + '.png';
     }
 
     hitPaddle(paddle){

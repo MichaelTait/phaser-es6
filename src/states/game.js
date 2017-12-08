@@ -81,7 +81,7 @@ export default class extends Phaser.State {
       this.game.ballOnPaddle = false;
       this.ball.body.velocity.y = -300;
       this.ball.body.velocity.x = -75;
-      this.ball.animations.play('blink');
+      //this.ball.animations.play('blink');
     }
   }
 
@@ -119,8 +119,9 @@ export default class extends Phaser.State {
     }
     else{
       this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle.bind(this.ball, this.paddle), null, this);
+      
       for (let i = 0; i < this.bricks.length; i++) {
-      this.game.physics.arcade.collide(this.ball, this.bricks[i], this.bricks[i].destroy.bind(this.bricks[i]), null, this);
+        this.game.physics.arcade.collide(this.ball, this.bricks[i], this.bricks[i].destroy.bind(this.bricks[i], this.ball), null, this);
       }
     }
     if (this.game.score === this.bricks.length) {
@@ -128,8 +129,6 @@ export default class extends Phaser.State {
       this.ball.kill();
       this.state.start('Win');
     }
-
-    this.ball.update();
   }
   
   render() {
