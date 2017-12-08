@@ -5,6 +5,7 @@ import Phaser from 'phaser';
 import BootState from './states/boot';
 import GameState from './states/game';
 import WinState from './states/win';
+import LoseState from './states/lose';
 
 class Game extends Phaser.Game {
   constructor() {
@@ -16,6 +17,7 @@ class Game extends Phaser.Game {
     this.state.add('Boot', BootState, false);
     this.state.add('Game', GameState, false);
     this.state.add('Win', WinState, false);
+    this.state.add('Lose', LoseState, false);
     this.state.start('Boot');
   }
 }
