@@ -24,11 +24,11 @@ export default class extends Phaser.State {
 
    
 
-    this.load.image('background', 'src/assets/images/background.png');
+    this.load.image('splashscreen', 'src/assets/images/splashscreen.jpg');
   }
 
   create() {
-    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'background');
+    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'splashscreen');
     const text = this.add.text(this.world.centerX, this.world.centerY, 'Congratulations for Completing the Trial', {
       font: '44px Arial', fill: '#000000', align: 'center'
     });
