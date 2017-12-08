@@ -16,7 +16,8 @@ export default class extends Phaser.Sprite {
       this.brickSound = this.game.add.audio('brickSound');
     }
 
-    destroy() {
+    destroy(ball) {
+      ball.changeFrame();
       this.brickSound.play();
       this.kill();
       this.game.score++;
