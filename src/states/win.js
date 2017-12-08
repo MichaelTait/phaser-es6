@@ -33,7 +33,7 @@ export default class extends Phaser.State {
       font: '44px Arial', fill: '#000000', align: 'center'
     });
     text.anchor.setTo(0.5, 0.5);
-    const subText = this.add.text(this.world.centerX, this.world.centerY + 50, 'HOFEBSOFUBSEIFBIESBF', {
+    const subText = this.add.text(this.world.centerX, this.world.centerY + 50, 'Click to restart', {
       font: '33px Arial', fill: '#000000', align: 'center'
     });
     subText.anchor.setTo(0.5, 0.5);
