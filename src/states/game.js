@@ -16,14 +16,6 @@ export default class extends Phaser.State {
   init() {
     //Set the main background colour of the scene.
     this.stage.backgroundColour = '#ff00ff';
-    this.game.score = 0;
-    this.game.scoreText = this.add.text(16, this.game.height -50, 'Score: ' + this.game.score, {
-      font: '44px Arial', fill: '#efefef', align: 'center'
-    });
-    this.game.lives = 3;
-    this.game.livesText = this.add.text(this.game.width - 175, this.game.height -50, 'Lives: ' + this.game.lives, {
-      font: '44px Arial', fill: '#efefef', align: 'center'});
-      
     this.game.ballOnPaddle = true;
   }
 
@@ -31,10 +23,19 @@ export default class extends Phaser.State {
     this.load.atlas('ball', 'src/assets/images/spriteSheet.png', 'src/assets/images/spriteSheet.json')
     this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
+    this.load.image('background', 'src/assets/images/background.png');
   }
     
   create() {
-    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
+    game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'background');
+    this.game.score = 0;
+    this.game.scoreText = this.add.text(16, this.game.height -50, 'Score: ' + this.game.score, {
+      font: '44px Arial', fill: '#efefef', align: 'center'
+    });
+    this.game.lives = 3;
+    this.game.livesText = this.add.text(this.game.width - 175, this.game.height -50, 'Lives: ' + this.game.lives, {
+      font: '44px Arial', fill: '#efefef', align: 'center'});
+    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY + 350, 'paddle');
     this.game.stage.addChild(this.paddle);
 
     this.ball = new Ball(this.game, this.paddle.x, this.paddle.y - 40, 'ball');
@@ -75,7 +76,13 @@ export default class extends Phaser.State {
 
     if(this.game.lives === 0)
     {
-        //this.game.state.start('GameOver');
+      for (let i = 0; i < this.bricks.length; i++) {
+        this.bricks[i].kill();
+      }
+      this.paddle.kill();
+      this.ball.kill();
+      this.game.state.start('Lose');
+        
     }
     else
     {
