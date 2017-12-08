@@ -12,7 +12,10 @@ export default class extends Phaser.State {
     this.wallLength = ~~(window.innerWidth/128);
     this.wallHeight = 4;
     this.bricks = [];
-
+    
+    this.collisionSound;
+    this.deathSound;
+    this.brickSound;
   }
 
   init() {
@@ -25,11 +28,21 @@ export default class extends Phaser.State {
     this.load.atlas('ball', 'src/assets/images/spriteSheet.png', 'src/assets/images/spriteSheet.json')
     this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
-    this.load.image('background', 'src/assets/images/background.png');
 
-  }
+    this.load.audio('brickSound', 'src/assets/Audio/brickSound.wav');
+    this.load.audio('collisionSound', 'src/assets/Audio/collisionSound.wav');
+    this.load.audio('deathSound', 'src/assets/Audio/deathSound.wav');
     
+    this.load.image('background', 'src/assets/images/background.png');
+  }
+  
   create() {
+    this.deathSound = this.game.add.audio('deathSound');
+    
+        this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
+
+        this.load.image('background', 'src/assets/images/background.png');
+
     game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'background');
     this.game.score = 0;
     this.game.scoreText = this.add.text(16, this.game.height -50, 'Score: ' + this.game.score, {
@@ -74,6 +87,8 @@ export default class extends Phaser.State {
   }
 
   death() {
+
+    this.deathSound.play();
     this.game.lives -= 1;
     this.game.livesText.setText('lives: ' + this.game.lives);
 
@@ -114,6 +129,8 @@ export default class extends Phaser.State {
       this.ball.kill();
       this.state.start('Win');
     }
+
+    this.ball.update();
   }
   
   render() {

@@ -5,6 +5,7 @@ export default class extends Phaser.State {
   constructor() {
     super();
     this.fontsReady = false;
+    this.sound;
   }
 
   init() {
@@ -21,10 +22,12 @@ export default class extends Phaser.State {
       active: () => this.fontsReady = true
     });
 
-   
+   this.load.audio('gamePlay', 'src/assets/Audio/gamePlay.mp3');
 
     this.load.image('jakub', 'src/assets/images/jakub.png');
   }
+
+
 
   create() {
     game.add.tileSprite(0,0, window.innerWidth, window.innerHeight, 'jakub');
@@ -36,17 +39,20 @@ export default class extends Phaser.State {
       font: '33px Arial', fill: '#000000', align: 'center'
     });
     subText.anchor.setTo(0.5, 0.5);
+
+    this.sound = this.add.audio('gamePlay')
+    this.sound.play();
   }
 
   render() {
     if (this.fontsReady) {
-      console.log('Fonts loaded');
     }
   }
 
   update() {
     if (this.input.activePointer.isDown) {
       this.state.start('Game');
+      this.sound.stop();
     }
   }
 }
