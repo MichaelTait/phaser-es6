@@ -81,7 +81,7 @@ export default class extends Phaser.State {
       this.game.ballOnPaddle = false;
       this.ball.body.velocity.y = -300;
       this.ball.body.velocity.x = -75;
-      this.ball.animations.play('spin');
+      this.ball.animations.play('blink');
     }
   }
 
