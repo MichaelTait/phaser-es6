@@ -16,6 +16,11 @@ export default class extends Phaser.State {
   init() {
     //Set the main background colour of the scene.
     this.stage.backgroundColour = '#ff00ff';
+    this.game.score = 0;
+    this.game.scoreText = this.add.text(this.world.centerX, this.world.centerY + window.innerHeight - 700, 'Score: ' + this.game.score, {
+      font: '44px Arial', fill: '#efefef', align: 'center'
+    });
+
   }
 
   preload() {
@@ -24,7 +29,7 @@ export default class extends Phaser.State {
     this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
   }
-
+    
   create() {
 
     var backgroundImage = game.add.sprite(130, 300, 'logo');
@@ -32,9 +37,6 @@ export default class extends Phaser.State {
 
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
-
-    this.brick = new Brick(this.game, this.game.world.centerX, this.game.world.centerY, 'brick');
-    this.game.stage.addChild(this.brick);
 
     this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
     this.game.stage.addChild(this.paddle);
@@ -46,19 +48,23 @@ export default class extends Phaser.State {
       for (let x = 0; x < this.wallHeight; x++) {
         const padding = 80;
         const maxHeight = window.innerWidth / 5;
-        const maxWidth = window.innerWidth;
+        const maxWidth = window.innerWidth / 2;
 
         const positionX = (maxWidth / this.wallLength  * i) + padding;
         const positionY = (maxHeight / this.wallHeight * x) + padding;
 
         const brick = new Brick(this.game, positionX, positionY, 'brick');
         this.game.stage.addChild(brick);
+        this.bricks.push(brick);
       }
     }
   }
 
   update(){
     this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle.bind(this.ball, this.paddle), null, this);
+    for (let i = 0; i < this.bricks.length; i++) {
+      this.game.physics.arcade.collide(this.ball, this.bricks[i], this.bricks[i].destroy.bind(this.bricks[i]), null, this);
+    }
   }
   
   render() {
