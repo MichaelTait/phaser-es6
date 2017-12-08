@@ -1,24 +1,35 @@
 import Phaser from 'phaser';
 import WebFont from 'webfontloader';
 import Ball from '../components/ball';
-import Block from '../components/Blocks/block';
+import Brick from '../components/Blocks/brick';
 import Paddle from '../components/Blocks/paddle';
 
 export default class extends Phaser.State {
   constructor() {
     super();
     this.fontsReady = false;
-
+    this.wallLength = 10;
+    this.wallHeight = 4;
+    this.bricks = [];
   }
 
   init() {
     //Set the main background colour of the scene.
     this.stage.backgroundColour = '#ff00ff';
+    this.game.score = 0;
+    this.game.scoreText = this.add.text(this.world.centerX, this.world.centerY + window.innerHeight - 700, 'Score: ' + this.game.score, {
+      font: '44px Arial', fill: '#efefef', align: 'center'
+    });
+
   }
 
   preload() {
+    this.load.image('ball', 'src/assets/images/ball1.png');
+    // this.load.image('ball2', 'src/assets/images/ball2.png');
+    // this.load.image('ball3', 'src/assets/images/ball3.png');
+    // this.load.image('ball4', 'src/assets/images/ball4.png');
     this.load.image('ball', 'src/assets/images/ball.png');
-    this.load.image('block', 'src/assets/images/block.png');
+    this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
   }
     
@@ -26,18 +37,34 @@ export default class extends Phaser.State {
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);
 
-    this.block = new Block(this.game, this.game.world.centerX, this.game.world.centerY, 'block');
-    this.game.stage.addChild(this.block);
+    this.brick = new Brick(this.game, this.game.world.centerX, this.game.world.centerY, 'brick');
+    this.game.stage.addChild(this.brick);
 
-    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY + 500, 'paddle');
-    this.game.stage.addChild(this.paddle);
-    this.game.physics.enable(this.paddle, Phaser.Physics.ARCADE);
+    this.paddle = new Paddle(this.game, this.game.world.centerX, this.game.world.centerY, 'paddle');
+    //this.game.stage.addChild(this.paddle);
 
+    for (let i = 0; i < this.wallLength; i++) {
+      for (let x = 0; x < this.wallHeight; x++) {
+        const padding = 80;
+        const maxHeight = window.innerWidth / 5;
+        const maxWidth = window.innerWidth / 2;
+
+        const positionX = (maxWidth / this.wallLength  * i) + padding;
+        const positionY = (maxHeight / this.wallHeight * x) + padding;
+
+        const brick = new Brick(this.game, positionX, positionY, 'brick');
+        this.game.stage.addChild(brick);
+        this.bricks.push(brick);
+      }
+    }
   }
 
   update(){
-    this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle, null, this);
+    this.game.physics.arcade.collide(this.ball, this.paddle, this.ball.hitPaddle.bind(this.ball, this.paddle), null, this);
+    for (let i = 0; i < this.bricks.length; i++) {
+      this.game.physics.arcade.collide(this.ball, this.bricks[i], this.bricks[i].destroy.bind(this.bricks[i]), null, this);
     }
+  }
   
   render() {
     if (this.fontsReady) {
