@@ -32,7 +32,7 @@ export default class extends Phaser.State {
     this.load.image('brick', 'src/assets/images/brick.png');
     this.load.image('paddle', 'src/assets/images/paddle.png');
   }
-
+    
   create() {
     this.ball = new Ball(this.game, this.game.world.centerX, this.game.world.centerY, 'ball');
     this.game.stage.addChild(this.ball);

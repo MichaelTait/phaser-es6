@@ -4,12 +4,11 @@ import {paddle} from '../assets';
 export default class extends Phaser.Sprite {
     constructor(phaserGame, x, y, asset) {
         super(phaserGame, x, y, asset);
-        this.scale.setTo(1);
+        this.scale.setTo(0.5);
         this.anchor.set(0.5);
         phaserGame.physics.enable(this, Phaser.Physics.ARCADE);
         this.body.collideWorldBounds = true;
         this.body.bounce.set(1);
-        // this.events.onOutOfBounds.add(ballLost, this);
         //this.animations.add('spin', ['ball1', 'ball2', 'ball3', 'ball4'], 50, true, false);
         //this.animations.play('spin');
         this.body.velocity.y = -200;
