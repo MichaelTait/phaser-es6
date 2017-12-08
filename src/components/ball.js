@@ -9,8 +9,8 @@ export default class extends Phaser.Sprite {
         phaserGame.physics.enable(this, Phaser.Physics.ARCADE);
         this.body.collideWorldBounds = true;
         this.body.bounce.set(1);
-        this.body.velocity.y = -200;
-        this.body.velocity.x = -75;
+        this.body.velocity.y = -2000;
+        this.body.velocity.x = -750;
         this.create();
     }
 

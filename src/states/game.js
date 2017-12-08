@@ -65,6 +65,9 @@ export default class extends Phaser.State {
     for (let i = 0; i < this.bricks.length; i++) {
       this.game.physics.arcade.collide(this.ball, this.bricks[i], this.bricks[i].destroy.bind(this.bricks[i]), null, this);
     }
+    if (this.game.score == 80) {
+      this.state.start('Win');
+    }
   }
   
   render() {
